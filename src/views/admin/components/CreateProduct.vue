@@ -3,7 +3,7 @@
         <div v-if="this.$data.error_msg != '' " :class="this.$data.error == true ? 'bg-red-600' : 'bg-green-600' " class="flex absolute-center text-white font-semibold h-24 w-2/3 p-2 rounded-lg">
             <span class="m-auto">{{ this.$data.error_msg }}</span>
         </div>
-        <div class="flex flex-col mx-auto w-auto lg:w-full xl:w-3/4 bg-gradient-to-r from-blue-600 via-blue-600 to-teal-500 py-4 px-8 rounded-lg shadow-lg shadow-outer">
+        <div class="flex flex-col mx-auto w-3/4 mt-10 bg-gradient-to-r from-blue-600 via-blue-600 to-teal-500 py-4 px-8 rounded-lg shadow-lg shadow-outer sm:w-full xl:w-3/4">
             <div class="w-full px-3 mb-8">
                 <label class="block text-white text-sm font-semibold" for="name">Title</label>
                 <input v-model="product.name" name="name" class="border-2 border-gray-800 rounded-lg text-center block w-full p-3 mt-2 placeholder-gray-300 placeholder-opacity-50 text-white bg-transparent focus:shadow-xl focus:shadow-outer focus:border-white focus:outline-none" type="text" required placeholder="Blue T-shirt">
@@ -54,10 +54,10 @@
             <div class="flex flex-col">
                 <template v-if="this.img_urls">
                     <img v-for="url in this.img_urls" :key="url" :src="url" class="w-1/2 xl:w-1/3 mx-auto mb-10 lg:mb-0" width="200px" />
-                    <input class="w-2/3" v-show="!disabled" type="file" multiple accept="image/jpeg" @change="uploadFile" />
+                    <input class="w-2/3 mx-auto" v-show="!disabled" type="file" multiple accept="image/jpeg" @change="uploadFile" />
                 </template>
                 <template v-else>
-                    <input class="w-2/3" v-show="!disabled" type="file" multiple accept="image/jpeg" @change="uploadFile" />
+                    <input class="w-2/3 mx-auto" v-show="!disabled" type="file" multiple accept="image/jpeg" @change="uploadFile" />
                     <!-- <button 
                         @click="$refs.file.click()"
                         class="w-2/3 py-1 mx-auto cursor-pointer shadow bg-blue-600 hover:bg-blue-400 focus:shadow-outline focus:outline-none text-white font-bold md:py-2 px-4 rounded">

@@ -7,11 +7,11 @@ export const messageMixin = {
     },
 
     methods: {
-        showMessage(msg) {
+        showMessage(msg, time = 3000) {
             this.error_msg = msg
             setTimeout(() => {
                 this.error_msg = ''
-            }, 3000)
+            }, time)
         },
     }
 }

@@ -37,6 +37,11 @@ const routes = [
         meta: { requiresAuth: true }
     },
     {
+        path: "/cart",
+        name: "cart",
+        component: () => import("../views/main/pages/Cart.vue"),
+    },
+    {
         path: "/dashboard",
         name: "dashboard",
         beforeEnter(to, from, next) {
@@ -81,25 +86,25 @@ const routes = [
     {
         path: "/order",
         name: "dashboard-order",
-        component: () => import("../views/admin/pages/Account"),
+        component: () => import("../views/admin/pages/Order"),
         meta: { requiresAuth: true, layout: 'admin' }
     },
     {
         path: "/stock",
         name: "dashboard-stock",
-        component: () => import("../views/admin/pages/Account"),
+        component: () => import("../views/admin/pages/Stock"),
         meta: { requiresAuth: true, layout: 'admin' }
     },
     {
         path: "/statistic",
         name: "dashboard-statistic",
-        component: () => import("../views/admin/pages/Account"),
+        component: () => import("../views/admin/pages/Statistic"),
         meta: { requiresAuth: true, layout: 'admin' }
     },
     {
         path: "/help",
         name: "dashboard-help",
-        component: () => import("../views/admin/pages/Account"),
+        component: () => import("../views/admin/pages/Help"),
         meta: { requiresAuth: true, layout: 'admin' }
     },
     

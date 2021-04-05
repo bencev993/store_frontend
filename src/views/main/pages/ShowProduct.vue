@@ -77,7 +77,7 @@ export default {
             NProgress.start()
             this.$store.dispatch('product/fetchProduct', this.id)
             .then((response) => {
-                this.product = response.data
+                this.product = response.data.product
                 NProgress.done()
                 this.loading = false
             })

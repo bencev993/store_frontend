@@ -18,8 +18,8 @@ export const mutations = {
 }
 
 export const actions = {
-    fetchProducts({ commit }) {
-        return apiClient.get('/home')
+    fetchProducts({ commit }, page) {
+        return apiClient.get('/products/?page='+page)
         .then(response => {
             commit('SET_PRODUCTS', response.data)
             return response
@@ -46,6 +46,27 @@ export const actions = {
         return apiClient.post('/admin/update-product', product)
         .then(response => {
             response.status === 200 ?? this.fetchProducts
+            return response
+        })
+    },
+
+    activateProduct({ commit }, id) {
+        return apiClient.post('/admin/activate-product', {
+            id: id
+        })
+        .then(response => {
+            response.status === 200 ?? this.fetchProducts
+            return response
+        })
+    },
+
+    deleteProduct({ commit }, id) {
+        return apiClient.post('/admin/delete-product', {
+            id: id
+        })
+        .then(response => {
+            response.status === 200 ?? this.fetchProducts
+            return response
         })
     }
 

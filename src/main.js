@@ -3,6 +3,7 @@ import App from "./App.vue"
 import router from "./router"
 import store from "./store"
 import "./main.css"
+import InfiniteLoading from 'vue-infinite-loading';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faPhoneAlt, faClipboardList, faUserNinja, faDumbbell, faDollarSign, faCheck, faArrowUp} from '@fortawesome/free-solid-svg-icons'
 import { faTwitter, faFacebookF, faInstagram, faGooglePlusG } from '@fortawesome/free-brands-svg-icons'
@@ -13,7 +14,7 @@ library.add([ faPhoneAlt, faClipboardList, faUserNinja, faDumbbell, faDollarSign
     faCheck, faFacebookF, faTwitter, faInstagram, faGooglePlusG, faArrowUp ])
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
-
+Vue.use(InfiniteLoading, { /* options */ })
 Vue.config.productionTip = false
 
 new Vue({

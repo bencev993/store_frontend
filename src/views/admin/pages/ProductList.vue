@@ -19,8 +19,9 @@
                     <!-- <?php $link = ['route' => 'admin.product.index'] ?>
                     @include('admin.includes.searchform', $link) -->
                 </div>
-                    <product-card v-for="product in this.products" :key="product.id" :product="product" />
+                    <product-card v-for="product in this.products" v-on:reset="reset" :key="product.id" :product="product" />
             </div>
+            <infinite-loading :identifier="infiniteId" @infinite="infiniteHandler"><span slot="no-more"></span></infinite-loading>
         </div>
         <div class="panel-2 tab-content lg:h-full" v-show="tabClicked">
             <div class="flex">
@@ -31,10 +32,6 @@
         </div>
     </div>
 </div>
-<!-- <div class="mt-20 tailwind-pagination">
-        {{ $products->links('pagination::tailwind') }}
-</div> -->
-
 
 </template>
 
@@ -51,23 +48,38 @@ import CreateProduct from '../components/CreateProduct'
         data() {
             return {
                 tabClicked: false,
-                products: {}
+                products: [],
+                page: 1,
+                infiniteId: 0
             }
-        },
-
-        mounted() {
-            this.$store.dispatch('product/fetchProducts')
-            .then((response) => {
-                this.products = response.data
-            })
         },
 
         methods: {
             togglePanel() {
                 this.tabClicked = !this.tabClicked
-            }
+            },
 
-        }
+            infiniteHandler($state) {
+                this.$store.dispatch('product/fetchProducts', this.page)
+                .then((response) => {
+                    if (response.data.length) {
+                        this.page += 1
+                        this.products.push(...response.data)
+                        $state.loaded()
+                    } else {
+                        $state.complete()
+                    }
+                })
+            },
+
+            reset() {
+                this.page = 1
+                this.products = []
+                this.infiniteId += 1
+
+            },
+
+        },
     }
 </script>
 
