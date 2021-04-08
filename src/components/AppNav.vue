@@ -11,15 +11,15 @@
                 </ul>
                 <ul class="ml-auto flex flex-row">
                     <template v-if="!loggedIn">
-                        <li><router-link to="/register" class="px-4 hover:text-linkcolor" href="#">Sign Up</router-link></li>
-                        <li><router-link to="/login" class="px-4 hover:text-linkcolor" href="#">Login</router-link></li>
+                        <li><router-link to="/register" class="px-4 hover:text-linkcolor">Sign Up</router-link></li>
+                        <li><router-link to="/login" class="px-4 hover:text-linkcolor">Login</router-link></li>
                     </template>
                     <template v-else-if="isAdmin">
-                        <li><router-link to="/dashboard" class="px-4 hover:text-linkcolor" href="#">Dashboard</router-link></li>
+                        <li><router-link to="/dashboard" class="px-4 hover:text-linkcolor">Dashboard</router-link></li>
                         <li><a href="#" class="px-4 hover:text-linkcolor" @click.prevent="logout">Logout</a></li>
                     </template>
                     <template v-else>
-                        <li><router-link to="/profile" class="px-4 hover:text-linkcolor" href="#">Profile</router-link></li>
+                        <li><router-link to="/profile" class="px-4 hover:text-linkcolor">Profile</router-link></li>
                         <li><a href="#" class="px-4 hover:text-linkcolor" @click.prevent="logout">Logout</a></li>
                     </template>
 
@@ -46,9 +46,25 @@
                             Home
                         </router-link>
                     </li>
-                    <li class="my-2 lg:my-4"><a class="px-20 lg:px-10 py-2 border border-transparent text-textdefault hover:text-linkcolor focus:border-primary"
-                        href="#team" @click.prevent="routeName() === 'front' ? scrollTo('team') : toFrontPage()">Team</a>
+                    
+                    <li class="toggleable hoverable w-full py-2 bg-white text-orange shadow-md lg:w-auto lg:shadow-none lg:bg-transparent lg:text-white mt-3 lg:mt-0 lg:mx-auto">
+                        <input type="checkbox" value="selected" id="toggle-one" class="toggle-input">
+                        <label for="toggle-one" class="block cursor-pointer lg:p-6">Categories</label>
+                        <div role="toggle" class="p-6 mt-2 lg:mt-0 text-left mega-menu mb-16 z-20 sm:mb-0 shadow-xl bg-gradient-to-b from-black via-gray-600 to-gray-200">
+                            <div class="container mx-auto w-full flex flex-wrap justify-between mx-2">
+                                <ul v-for="category in this.categories" :key="category.parent_id" class="px-4 w-full sm:w-1/2 lg:w-1/4 border-red-600 border-b sm:border-r lg:border-b-0 pb-6 pt-6 lg:pt-3">
+                                    <h3 class="font-bold text-xl text-white text-bold mb-2">{{ category.parent_name }}</h3>
+                                    <li v-for="subcategory in category.subcategories" :key="subcategory.id">
+                                        <router-link :to="{ name: 'category', params: { id: subcategory.id } }"
+                                            class="block cursor-pointer p-3 lg:pl-24 hover:bg-white text-white hover:text-orange text-center lg:text-left">
+                                            {{ subcategory.category_name }}
+                                        </router-link>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
                     </li>
+
                     <li class="my-2 lg:my-4"><a class="px-20 lg:px-10 py-2 border border-transparent text-textdefault hover:text-linkcolor focus:border-primary"
                         href="#contact" @click.prevent="routeName() === 'front' ? scrollTo('contact') : toFrontPage()">Contact</a>
                     </li>
@@ -57,8 +73,7 @@
                             <svg class="w-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
                             </svg>
-                            <span class="text-lg">{{ countCartItems }}</span>
-                            <!-- <span class="text-lg">{{ Session::has('cart') ? Session::get('cart')->totalQuantity : '' }}</span> -->
+                            <span class="text-lg">{{ countCartItems > 0 ? countCartItems : '' }}</span>
                         </router-link>
                     </li>
                 </ul>
@@ -74,6 +89,7 @@ import { authComputed } from '../store/helpers.js';
 export default {
     data() {
         return {
+            categories: [],
             closeMenu: false,
             toggleClicked: false,
             screenWidth: window.innerWidth,
@@ -82,23 +98,20 @@ export default {
     
     computed : {
         ...authComputed,
+        
         countCartItems() {
             return this.$store.getters['cart/getCountedItems']
-        }
+        },
+
     },
 
     mounted() {
+        this.$store.dispatch('category/fetchCategories')
+        .then((response) => {
+            this.categories = response.data.categories
+        })
+
         window.addEventListener('resize', this.resizeWidth)
-
-        let theme = localStorage.getItem('theme');
-
-        if (theme === 'light') {
-            document.documentElement.setAttribute('theme', 'light')
-            this.toggleClicked = true
-        } else {
-            document.documentElement.setAttribute('theme', 'dark');
-            this.toggleClicked = false
-        }
     },
 
     beforeDestroy() {
@@ -109,15 +122,19 @@ export default {
         scrollTo(selector) {
             document.getElementById(selector).scrollIntoView({ behavior: 'smooth'})
         },
+
         resizeWidth() {
             this.screenWidth = window.innerWidth
         },
+
         routeName() {
             return this.$route.name
         },
+
         toFrontPage() {
             this.$router.push({ 'name': 'front'})
         },
+
         logout() {
             this.$store.dispatch('user/logout')
             .then(() => {

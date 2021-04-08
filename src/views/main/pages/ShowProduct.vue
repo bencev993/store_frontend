@@ -27,7 +27,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
                     </svg>
                     <!-- <a href="{{ route('product.addtocart', ['id' => $product['id']]) }}" class="mx-auto flex items-center h-full"><span class="block font-bold text-xs">ADD TO CART</span></a> -->
-                    <a href="#" class="mx-auto flex items-center h-full"><span class="block font-bold text-xs">ADD TO CART</span></a>
+                    <a @click.prevent="addToCart()" href="#" class="mx-auto flex items-center h-full"><span class="block font-bold text-xs">ADD TO CART</span></a>
                 </button>
                 <button v-else class="mt-10 text-white text-center rounded-lg flex mx-auto w-1/2 h-10 cursor-default items-center">
                     <span class="w-full py-2 px-1 font-bold text-xs bg-gray-300 text-black">Out of stock</span>
@@ -43,22 +43,26 @@
 
 <script>
 import { productMixin } from '@/mixins/productMixin'
+import { messageMixin } from '@/mixins/messageMixin'
 import NProgress from 'nprogress'
 
 export default {
-    mixins: [productMixin],
+    mixins: [productMixin, messageMixin],
 
     props: {
         id: {
             required: true
         },
     },
+
     data() {
         return {
             loading: true,
-            product: {}
+            product: {},
+            cartItems: []
         }
     },
+
     computed: {
         isLong() {
             return this.product.description && this.product.description.length > 400
@@ -70,6 +74,8 @@ export default {
 
     mounted() {
         this.getProduct()
+        this.cartItems = JSON.parse(localStorage.getItem('cart'))
+        this.cartItems.length > 0 ? this.$store.dispatch('cart/refreshCart', this.cartItems) : null
     },
 
     methods: {
@@ -81,7 +87,55 @@ export default {
                 NProgress.done()
                 this.loading = false
             })
-        }
+        },
+
+        addToCart() {
+            this.$store.dispatch('cart/addToCart', this.product)
+            .then(() => {
+                if(localStorage.getItem('cart')) {
+                    this.cartItems = JSON.parse(localStorage.getItem('cart'))
+                    if(!this.checkStorage(this.product.id)) {
+                        let image = this.product.images.length > 0 ? this.product.images[0].image : ''
+                        this.cartItems.push({
+                            id: this.product.id,
+                            name: this.product.name,
+                            image: image,
+                            price: this.product.price,
+                            quantity: 1
+                        })
+                        localStorage.setItem('cart', JSON.stringify(this.cartItems))
+                    }
+
+                } else {
+                    let image = this.product.images.length > 0 ? this.product.images[0].image : ''
+                    this.cartItems.push({
+                        id: this.product.id,
+                        name: this.product.name,
+                        image: image,
+                        price: this.product.price,
+                        quantity: 1
+                    })
+                    localStorage.setItem('cart', JSON.stringify(this.cartItems))
+                }
+
+                this.showMessage(`${this.product.name} added to your cart`)
+            })
+        },
+
+        checkStorage(id) {
+            const items = localStorage.getItem('cart')
+            let exists = false
+            
+            if (items) {
+                const cartItems = JSON.parse(items)
+                if(cartItems.find(item => item.id === id)) {
+                    exists = true
+                }
+            }
+
+            return exists
+        },
+
     }
 
 }

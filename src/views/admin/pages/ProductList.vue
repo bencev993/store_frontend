@@ -76,7 +76,6 @@ import CreateProduct from '../components/CreateProduct'
                 this.page = 1
                 this.products = []
                 this.infiniteId += 1
-
             },
 
         },

@@ -26,16 +26,16 @@
 
             <div class="flex justify-evenly items-end mb-4 lg:w-1/2 lg:ml-auto lg:pr-20 lg:justify-around">
                 <h2 class="text-lg tracking-widest font-semibold">Total Price: </h2>
-                <span class="text-red-500 font-bold text-2xl">$ 33</span>
+                <span class="text-red-500 font-bold text-2xl">$ {{ totalPrice }}</span>
             </div>
             <div class="flex flex-col-reverse items-center border-t-2 sm:flex-row sm:justify-evenly">
                 <div class="py-10 w-4/5 sm:w-1/3 sm:px-4 md:w-1/2 lg:w-1/4">
-                    <a href="#" class="flex justify-evenly text-center text-white text-sm bg-gray-500 rounded-lg py-2 md:p-2 md:text-lg">
+                    <router-link to="/" class="flex justify-evenly text-center text-white text-sm cursor-pointer bg-gray-500 rounded-lg py-2 md:p-2 md:text-lg">
                         <svg class="w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                             <path fill-rule="evenodd" d="M7.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l2.293 2.293a1 1 0 010 1.414z" clip-rule="evenodd" />
                         </svg>
                         Continue shopping
-                    </a>
+                    </router-link>
                 </div>
                 <div class="py-10 w-4/5 sm:w-1/3 sm:px-4 md:w-1/2 lg:w-1/4">
                     <a href="#" class="flex justify-evenly text-center text-white text-sm bg-green-500 rounded-lg p-2 md:text-lg">
@@ -64,6 +64,10 @@ export default {
         imgUrl() {
             return 'http://127.0.0.1:8000/images/'
         },
+
+        totalPrice() {
+            return this.$store.getters['cart/getTotalPrice']
+        }
     },
 
     mounted() {

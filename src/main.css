@@ -49,6 +49,7 @@ p {
 input[type="button"] {
   outline: none;
 }
+
 input[type="button"]::-moz-focus-inner {
   border: 0 !important;
 }
@@ -128,6 +129,11 @@ textarea {
   background-position: left bottom;
 }
 
+.add-to-cart-btn:focus {
+  outline: none;
+  border: 0;
+}
+
 .product-img {
   transition: transform 300ms ease-in-out, opacity 250ms linear;
 }
@@ -161,14 +167,6 @@ textarea {
 .ul-height {
   height: 72%;
 }
-
-/* .tab-content {
-  display: none;
-}
-
-.tab-content.active {
-  display: block;
-} */
 
 .dropdown:hover .dropdown-menu {
   display: block;
@@ -233,6 +231,60 @@ textarea {
 
 .fade-enter, .fade-leave-to {
   opacity: 0;
+}
+
+/* #Mega Menu Styles
+  –––––––––––––––––––––––––––––––––––––––––––––––––– */
+  .mega-menu {
+    display: none;
+    left: 0;
+    position: absolute;
+    width: 100%;
+}
+
+  /* #hoverable Class Styles
+  –––––––––––––––––––––––––––––––––––––––––––––––––– */
+.hoverable {
+    position: static;
+}
+
+.hoverable > a:after {
+    content: "\25BC";
+    font-size: 10px;
+    padding-left: 6px;
+    position: relative;
+    top: -1px;
+}
+
+.hoverable:hover .mega-menu {
+    display: block;
+}
+
+.toggleable > label:after {
+    content: "\25BC";
+    font-size: 10px;
+    padding-left: 6px;
+    position: relative;
+    top: -1px;
+}
+
+.toggle-input {
+    display: none;
+}
+.toggle-input:not(checked) ~ .mega-menu {
+    display: none;
+}
+
+.toggle-input:checked ~ .mega-menu {
+    display: block;
+}
+
+.toggle-input:checked ~ label:after {
+    content: "\25B2";
+    font-size: 10px;
+    padding-left: 6px;
+    position: relative;
+    top: -1px;
 }
 
 @media screen and (orientation: landscape) and (max-width: 900px) and (min-width: 320px) {
