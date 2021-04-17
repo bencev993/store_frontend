@@ -2,7 +2,7 @@ export const messageMixin = {
     data() {
         return {
             error_msg: '',
-            error: false
+            error: false,
         }
     },
 

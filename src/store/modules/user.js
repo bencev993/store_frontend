@@ -40,6 +40,10 @@ export const actions = {
         commit('CLEAR_USER_DATA')
     },
 
+    getUserData({ commit }, token) {
+        return apiClient.post('/')
+    },
+
     updateUser({ commit }, user) {
         return apiClient.post('/admin/update-user', user)
         .then(response => {
@@ -52,6 +56,11 @@ export const getters = {
     loggedIn(state) {
         return !!state.user
     },
+
+    getUser(state) {
+        return state.user
+    },
+
     isAdmin(state) {
         return state.user.scope === 'admin'
     }

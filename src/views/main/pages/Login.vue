@@ -39,7 +39,7 @@
 </template>
 
 <script>
-import { authComputed } from '@/store/helpers.js';
+import { authComputed } from '@/store/helpers.js'
 
 export default {
     data() {
@@ -60,9 +60,6 @@ export default {
                 this.isAdmin 
                 ? this.$router.push({ name: 'dashboard' })
                 : this.$router.push({ name: 'profile' })
-            })
-            .catch(error => {
-                console.log(error)
             })
         }
     }

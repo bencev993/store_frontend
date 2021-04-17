@@ -64,9 +64,6 @@
 <script>
 
 export default {
-    components: {
-
-    },
     computed: {
         products() {
             return this.$store.getters['product/getPopularProducts']
@@ -91,5 +88,5 @@ export default {
         },
     }
 
-};
+}
 </script>

@@ -23,10 +23,17 @@ new Vue({
 
   created() {
       const userToken = localStorage.getItem('user')
+      const cartItems = JSON.parse(localStorage.getItem('cart'))
+      
       if(userToken) {
           const userData = JSON.parse(userToken)
           this.$store.commit('user/SET_USER_DATA', userData)
       }
+      
+      if(cartItems) {
+        this.$store.dispatch('cart/refreshCart', cartItems)
+      }
+
       apiClient.interceptors.response.use(
           response => response,
           error => {

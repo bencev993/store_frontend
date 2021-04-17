@@ -287,6 +287,38 @@ textarea {
     top: -1px;
 }
 
+.line {
+	position: absolute;
+	height: 10%;
+	width: 100%;
+	background:white;
+	border-radius: 10px;
+	transition: all cubic-bezier(0.25, 0.1, 0.28, 1.54) 1.1s;
+}
+
+.line1 {
+	top:19%;
+}
+
+.line2 {
+	top:49%;
+}
+
+.line3 {
+	top:79%;
+}
+
+.toggle-menu.close .line1 {
+	transform:rotate(45deg);
+	top:49%;
+}
+
+.toggle-menu.close .line2,
+.toggle-menu.close .line3 {
+	transform:rotate(-45deg);
+	top:49%;
+}
+
 @media screen and (orientation: landscape) and (max-width: 900px) and (min-width: 320px) {
   .tailwind-pagination {
     margin-top: 2.5rem;

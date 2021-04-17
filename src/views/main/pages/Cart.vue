@@ -1,10 +1,10 @@
 <template>
-    <div class="mx-auto p-4 mt-10 mb-8 md:p-10">
+    <div class="mx-auto p-4 md:p-10">
         <h1 class="text-center py-10 font-semibold tracking-widest xl:text-xl">Your Cart</h1>
         <div class="mx-auto text-lg md:w-2/3 lg:w-full xl:text-xl">
                 <div v-for="product in products" :key="product.id" class="grid grid-cols-4 mb-10 pt-5 border-t-2 lg:grid-cols-8 lg:items-center">
                     <div class="col-span-2 mx-auto product-image">
-                        <img v-if="product.image" :src="imgUrl + product.image" alt="productimg" class="h-32 w-32 xl:h-64 xl:w-64" />
+                        <img v-if="product.image" :src="imgUrl + product.image" alt="productimg" class="h-32 w-32" />
                     </div>
                     <div class="col-span-2 mx-auto w-full product-quantity flex items-center justify-evenly">
                         <h2 class="w-1/2 align-bottom text-center">{{ product.quantity }}</h2>
@@ -38,12 +38,12 @@
                     </router-link>
                 </div>
                 <div class="py-10 w-4/5 sm:w-1/3 sm:px-4 md:w-1/2 lg:w-1/4">
-                    <a href="#" class="flex justify-evenly text-center text-white text-sm bg-green-500 rounded-lg p-2 md:text-lg">
+                    <router-link to="/checkout-options" class="flex justify-evenly text-center text-white text-sm cursor-pointer bg-green-500 rounded-lg p-2 md:text-lg">
                         <svg class="w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                         </svg>
                         Proceed to checkout
-                    </a>
+                    </router-link>
                 </div>
             </div>
         </div>

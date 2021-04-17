@@ -66,11 +66,6 @@ export default {
         },
     },
 
-    mounted() {
-        this.cartItems = JSON.parse(localStorage.getItem('cart'))
-        this.cartItems.length > 0 ? this.$store.dispatch('cart/refreshCart', this.cartItems) : null
-    },
-
     methods: {
         addToCart(product) {
             this.$store.dispatch('cart/addToCart', product)

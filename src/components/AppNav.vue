@@ -22,7 +22,6 @@
                         <li><router-link to="/profile" class="px-4 hover:text-linkcolor">Profile</router-link></li>
                         <li><a href="#" class="px-4 hover:text-linkcolor" @click.prevent="logout">Logout</a></li>
                     </template>
-
                 </ul>
             </div>
             <div class="grid grid-flow-row place-items-center lg:flex lg:justify-between">
@@ -35,9 +34,9 @@
                 <div class="menu-btn text-textdefault place-self-start pl-4 py-2 lg:hidden">
                     <div class="h-6 w-6 toggle-menu relative cursor-pointer group" :class="{close: closeMenu}"
                         @click="closeMenu = !closeMenu">
-                        <span class="line line1 group-hover:bg-primary"></span>
-                        <span class="line line2 group-hover:bg-primary"></span>
-                        <span class="line line3 group-hover:bg-primary"></span>
+                        <span class="line line1 group-hover:bg-bgsecondary"></span>
+                        <span class="line line2 group-hover:bg-bgsecondary"></span>
+                        <span class="line line3 group-hover:bg-bgsecondary"></span>
                     </div>
                 </div>
                 <ul v-if="closeMenu || screenWidth >= 1024" class="list-none font-bold italic flex flex-col py-2 place-items-center justify-end mx-auto lg:w-full lg:flex-row lg:-mr-8">
@@ -47,7 +46,7 @@
                         </router-link>
                     </li>
                     
-                    <li class="toggleable hoverable w-full py-2 bg-white text-orange shadow-md lg:w-auto lg:shadow-none lg:bg-transparent lg:text-white mt-3 lg:mt-0 lg:mx-auto">
+                    <li class="toggleable hoverable px-20 lg:px-10 py-2 border border-transparent text-textdefault hover:text-linkcolor focus:border-primary">
                         <input type="checkbox" value="selected" id="toggle-one" class="toggle-input">
                         <label for="toggle-one" class="block cursor-pointer lg:p-6">Categories</label>
                         <div role="toggle" class="p-6 mt-2 lg:mt-0 text-left mega-menu mb-16 z-20 sm:mb-0 shadow-xl bg-gradient-to-b from-black via-gray-600 to-gray-200">

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="container mx-auto my-20">
+        <div v-show="this.page === 2" class="container mx-auto my-20">
             <div class="featured-products pb-20 px-10" id="featured">
                 <h2 style="font-family: Overpass" class="uppercase tracking-widest text-xl italic text-center font-bold pb-8">
                     Featured Products
@@ -10,7 +10,7 @@
                     <product-card v-for="product in productsForSale" :key="product.id" :product="product" />
                 </div>
             </div>
-        </div>    
+        </div>   
 
         <div class="container mx-auto my-20">
             <div class="new-products px-10" id="new">
@@ -21,8 +21,8 @@
                     <product-card v-for="product in this.products" :key="product.id" :product="product" />
                 </div>
             </div>
-                <infinite-loading :identifier="infiniteId" @infinite="infiniteHandler"><span slot="no-more"></span></infinite-loading>
         </div>
+                <infinite-loading :identifier="infiniteId" @infinite="infiniteHandler"><span slot="no-more"></span></infinite-loading>
     </div>
 </template>
 

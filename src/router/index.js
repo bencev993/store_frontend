@@ -48,14 +48,38 @@ const routes = [
         component: () => import("../views/main/pages/Cart.vue"),
     },
     {
+        path: "/checkout-options",
+        name: "checkout-options",
+        beforeEnter(to, from, next) {
+            if (getUser()) {
+                next('/checkout')
+            } else {
+                next()
+            }
+        },
+        component: () => import("../views/main/pages/CheckoutOptions.vue"),
+    },
+    {
+        path: "/checkout",
+        name: "checkout",
+        beforeEnter(to, from, next) {
+            if (getUser()) {
+                next()
+            } else {
+                next('/checkout-options')
+            }
+        },
+        component: () => import("../views/main/pages/Checkout.vue"),
+    },
+    {
         path: "/dashboard",
         name: "dashboard",
         beforeEnter(to, from, next) {
             if (getUser()) {
                 if (getUser().scope != 'admin') {
-                    next('/');
+                    next('/')
                 } else {
-                    next();
+                    next()
                 }
             } else {
                 next('/');
@@ -113,13 +137,18 @@ const routes = [
         component: () => import("../views/admin/pages/Help"),
         meta: { requiresAuth: true, layout: 'admin' }
     },
+    {
+        path: '/:pathMatch(.*)*',
+        component: () => import("../views/main/layouts/NotFound"),
+        meta: { requiresAuth: true, layout: '404' },
+    }
     
-];
+]
 
 const router = new VueRouter({
     mode: "history",
     routes
-});
+})
 
 router.beforeEach((to, from, next) => {
     const user = getUser()
@@ -130,7 +159,6 @@ router.beforeEach((to, from, next) => {
     next()
 
     if (to.matched.some(record => record.meta.hideForAuth) && user) {
-        console.log(user)
         next({ path: '/profile' })
     }
     next()
