@@ -7,7 +7,7 @@
                 </svg>
             </a>
         </div>
-        <div id="sidebar" ref="sidebar" class="hidden w-full lg:block lg:fixed lg:w-3/12 xl:w-2/12">
+        <div id="sidebar" ref="sidebar" class="hidden w-full mb-10 lg:mb-0 lg:block lg:fixed lg:w-3/12 xl:w-2/12">
             <sidebar></sidebar>
         </div>
         <div class="w-full sm:ml-auto lg:w-9/12 xl:w-10/12 flex">
