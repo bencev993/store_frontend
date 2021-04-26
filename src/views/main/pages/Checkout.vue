@@ -7,7 +7,7 @@
             <span class="m-auto">{{ this.$data.error_msg }}</span>
         </div>
 
-        <form method="post" id="payment-form">
+        <form>
             <div class="flex flex-col md:flex-row -mx-3">
                 <div class="w-full px-3 mb-8">
                     <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="name">
@@ -72,7 +72,7 @@
             </div>
             <div class="flex">
                 <div id="paypal-button"></div>
-                <button id="place-order" class="mx-auto shadow-md bg-teal-600 hover:bg-teal-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded">Place Order</button>
+                <button @click.prevent="submitPayment" id="place-order" class="mx-auto shadow-md bg-teal-600 hover:bg-teal-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded">Place Order</button>
             </div>
         </form>
 
@@ -92,7 +92,9 @@ export default {
         return {
             stripeAPIToken: 'pk_test_51HHWrwKg112ZJOxiCv5J7DUSybBa8HihazaqXyPqhdXwduVJHTw9PHMIJIVH5GHKPIp6YSca0AdQvWy2d3tAy9wt00jGkbIpjx',
             stripe: '',
+            stripeError: '',
             elements: '',
+            token: '',
             card: '',
             user: {
                 name: '',
@@ -133,6 +135,8 @@ export default {
 
     methods: {
         submitPayment() {
+            this.createToken()
+            
             if(!this.validateForm) {
                 return false
             }
@@ -147,7 +151,8 @@ export default {
                 country: this.user.country,
                 zip: this.user.zip,
                 total: this.totalPrice,
-                items: cartItems
+                items: this.cartItems,
+                stripeToken: this.token
             })
         },
 
@@ -192,6 +197,11 @@ export default {
                 this.error = true
                 return false
             }
+            if(!this.token) {
+                this.showMessage('Something went wrong with your card')
+                this.error = true
+                return false
+            }
             return true
         },
 
@@ -200,6 +210,7 @@ export default {
             object = documentTag.createElement(tag),
             scriptTag = documentTag.getElementsByTagName(tag)[0]
             object.src = '//' + URL
+            object.setAttribute('defer', 'defer')
             if (callback) { object.addEventListener('load', function (e) { callback(null, e) }, false) }
             scriptTag.parentNode.insertBefore(object, scriptTag)
         },
@@ -223,10 +234,22 @@ export default {
                 },
             }
 
-            this.stripe = Stripe(this.stripeAPIToken);
-            this.elements = this.stripe.elements();
-            this.card = this.elements.create('card', {style: cardStyle});
-            this.card.mount('#card-element');
+            this.stripe = Stripe(this.stripeAPIToken)
+            this.elements = this.stripe.elements()
+            this.card = this.elements.create('card', {style: cardStyle})
+            this.card.mount('#card-element')
+        },
+
+        createToken() {
+            this.stripe.createToken(this.card).then(function(result) {
+                if (result.error) {
+                    this.stripeError = result.error.message
+                    return false
+                } else {
+                    this.token = result.token
+                    return true
+                }
+            })
         },
     },
 

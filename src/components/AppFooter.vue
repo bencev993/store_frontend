@@ -1,6 +1,6 @@
 <template>
     <footer class="text-center md:text-left">
-        <nav class="mt-48 py-10 flex flex-col md:flex-row justify-around bg-orange text-xs text-white font-semibold">
+        <nav class="mt-48 py-10 flex flex-col md:flex-row justify-around bg-bgsecondary text-xs text-white font-semibold">
         <ul class="flex flex-col md:flex-row justify-evenly px-4 py-6">
             <div>
                 <h2 class="text-center text-sm md:text-left">Newsletter</h2>
@@ -21,7 +21,7 @@
                         </label>
                     </div>
                     <div class="flex">
-                        <button type="submit" class="w-full  border-2 shadow bg-white hover:border-4 hover:border-white hover:bg-orange hover:text-white focus:shadow-outline focus:outline-none text-orange font-bold py-2 px-4 rounded">
+                        <button type="submit" class="w-full  border-2 shadow bg-white hover:border-4 hover:border-white hover:bg-bgsecondary hover:text-white focus:shadow-outline focus:outline-none text-textprimary font-bold py-2 px-4 rounded">
                             Subscribe
                         </button>
                     </div>
@@ -59,7 +59,7 @@
             </div>
         </ul>
         </nav>
-        <div class="copy bg-orange text-white text-xs text-center py-6">
+        <div class="copy bg-bgprimary text-white text-xs text-center py-6">
             Copyright &copy; 2021. All rights reserved.
         </div>
     </footer>

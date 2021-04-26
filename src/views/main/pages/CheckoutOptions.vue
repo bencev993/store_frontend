@@ -15,12 +15,9 @@
                     <p class="max-w-sm mt-2 mb-8">Proceed to checkout and you will have an
                         opportunity to create an account at the end if one
                         does not already exist for you.</p>
-                    <!-- <a href="{{ route('checkout') }}" class="w-full max-w-sm shadow-lg bg-teal-600 hover:bg-teal-400 focus:shadow-outline focus:outline-none text-center text-white font-bold mb-20 py-2 px-4 rounded">
+                    <router-link to="/checkout" class="w-full max-w-sm shadow-lg bg-teal-600 hover:bg-teal-400 focus:shadow-outline focus:outline-none text-center text-white font-bold mb-20 py-2 px-4 rounded">
                         Continue as Guest
-                    </a> -->
-                    <a href="#" class="w-full max-w-sm shadow-lg bg-teal-600 hover:bg-teal-400 focus:shadow-outline focus:outline-none text-center text-white font-bold mb-20 py-2 px-4 rounded">
-                        Continue as Guest
-                    </a>
+                    </router-link>
                     <!-- <a class="bg-black text-white text-center text-xl py-1 rounded-lg italic font-extrabold" id="paypal-handle" href="{{ route('payment.handle') }}">PayPal</a> -->
                     <a class="bg-black text-white text-center text-xl cursor-pointer py-1 rounded-lg italic font-extrabold hover:bg-opacity-75">PayPal</a>
                 </div>

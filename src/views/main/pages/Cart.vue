@@ -80,6 +80,9 @@ export default {
             const items = JSON.parse(localStorage.getItem('cart'))
             this.$store.dispatch('cart/refreshCart', items)
             this.products = this.$store.getters['cart/getCartItems']
+            if(items.length === 0) {
+                this.$router.push({name: 'home'})
+            }
         },
 
         increase(id) {

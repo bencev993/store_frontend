@@ -62,13 +62,6 @@ const routes = [
     {
         path: "/checkout",
         name: "checkout",
-        beforeEnter(to, from, next) {
-            if (getUser()) {
-                next()
-            } else {
-                next('/checkout-options')
-            }
-        },
         component: () => import("../views/main/pages/Checkout.vue"),
     },
     {
@@ -82,7 +75,7 @@ const routes = [
                     next()
                 }
             } else {
-                next('/');
+                next('/')
             }
         },
         component: Dashboard,
