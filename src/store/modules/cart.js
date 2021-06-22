@@ -102,6 +102,11 @@ export const actions = {
         } else {
             commit('DECREASE_BY_ONE', id)
         }
+    },
+
+    emptyCart({ commit }) {
+        commit('SET_CART_ITEMS', [])
+        localStorage.clear()
     }
 }
 

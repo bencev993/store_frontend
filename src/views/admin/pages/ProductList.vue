@@ -14,7 +14,7 @@
         </div>
 
         <div class="panel-1 tab-content" v-show="!tabClicked">
-            <div class="mx-auto text-center text-xs sm:text-sm xl:w-4/5">
+            <div class="mx-auto text-center text-xs sm:text-sm w-full lg:w-4/5">
                 <div class="flex flex-row justify-end mb-10 md:mb-0">
                     <!-- <?php $link = ['route' => 'admin.product.index'] ?>
                     @include('admin.includes.searchform', $link) -->

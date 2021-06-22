@@ -16,11 +16,7 @@ export const actions = {
     stripePayment({ commit }, credentials) {
         return apiClient.post('/post-payment', credentials)
             .then((response) => {
-                if(response.status === 200) {
-                    commit('SET_PAYMENT_STATUS', 1)
-                } else {
-                    commit('SET_PAYMENT_STATUS', 0)
-                }
+                return response
             })
     },
 }

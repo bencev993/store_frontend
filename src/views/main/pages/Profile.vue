@@ -13,10 +13,6 @@ export default {
         getUsers() {
             apiClient.get('/profile')
             .then(response => {
-                console.log(response);
-            })
-            .catch(error => {
-                console.log(error);
             })
         }
     }

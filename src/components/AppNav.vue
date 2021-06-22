@@ -65,7 +65,7 @@
                     </li>
 
                     <li class="my-2 lg:my-4"><a class="px-20 lg:px-10 py-2 border border-transparent text-textdefault hover:text-linkcolor focus:border-primary"
-                        href="#contact" @click.prevent="routeName() === 'front' ? scrollTo('contact') : toFrontPage()">Contact</a>
+                        href="#contact" @click.prevent="routeName() === 'front' ? scrollTo('contact') : toHomePage()">Contact</a>
                     </li>
                     <li class="border-white border-2 rounded-full hover:shadow-lg hover:bg-bgsecondary hover:border-transparent lg:ml-auto">
                         <router-link :to="countCartItems > 0 ? '/cart' : ''" class="flex px-6 py-1">
@@ -130,14 +130,14 @@ export default {
             return this.$route.name
         },
 
-        toFrontPage() {
-            this.$router.push({ 'name': 'front'})
+        toHomePage() {
+            this.$router.push({ name: 'home' })
         },
 
         logout() {
             this.$store.dispatch('user/logout')
             .then(() => {
-                this.$router.push({name: 'home'})
+                this.$router.push({ name: 'home' })
             })
         }
         

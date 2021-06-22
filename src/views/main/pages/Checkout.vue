@@ -110,6 +110,7 @@ export default {
     },
 
     mounted() {
+        this.includeStripe('ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js')
         this.includeStripe('js.stripe.com/v3/', function(){
             this.configureStripe()
         }.bind(this))
@@ -134,72 +135,51 @@ export default {
     },
 
     methods: {
-        submitPayment() {
-            this.createToken()
-            
-            if(!this.validateForm) {
-                return false
-            }
-
-            this.cartItems = this.$store.getters['cart/getCartItems']
-            this.$store.dispatch('payment/stripePayment', {
-                name: this.user.name,
-                email: this.user.email,
-                phone: this.user.phone,
-                address: this.user.address,
-                city: this.user.city,
-                country: this.user.country,
-                zip: this.user.zip,
-                total: this.totalPrice,
-                items: this.cartItems,
-                stripeToken: this.token
-            })
-        },
 
         validateForm() {
             if(!this.user.name) {
                 this.showMessage('Name field can not be empty')
-                this.error = true
+                this.$data.error = true
                 return false
             }
             if(!this.user.email) {
                 this.showMessage('Email field can not be empty')
-                this.error = true
+                this.$data.error = true
                 return false
             }
             if(!this.user.phone) {
                 this.showMessage('Phone field can not be empty')
-                this.error = true
+                this.$data.error = true
                 return false
             }
             if(!this.user.address) {
                 this.showMessage('Address field can not be empty')
-                this.error = true
+                this.$data.error = true
                 return false
             }
             if(!this.user.city) {
                 this.showMessage('City field can not be empty')
-                this.error = true
+                this.$data.error = true
                 return false
             }
             if(!this.user.country) {
                 this.showMessage('Country field can not be empty')
-                this.error = true
+                this.$data.error = true
                 return false
             }
             if(!this.user.zip) {
                 this.showMessage('Zip field can not be empty')
-                this.error = true
+                this.$data.error = true
                 return false
             }
             if(!this.cartItems) {
                 this.showMessage('Items disappeared from your cart')
-                this.error = true
+                this.$data.error = true
                 return false
             }
             if(!this.token) {
                 this.showMessage('Something went wrong with your card')
-                this.error = true
+                this.$data.error = true
                 return false
             }
             return true
@@ -240,17 +220,63 @@ export default {
             this.card.mount('#card-element')
         },
 
-        createToken() {
-            this.stripe.createToken(this.card).then(function(result) {
-                if (result.error) {
+        async createToken() {
+            var self = this
+            await this.stripe.createToken(this.card).then(function(result) {
+                if (!result.error) {
+                    self.token = result.token.id
+                    return true
+                    
+                } else {
                     this.stripeError = result.error.message
                     return false
-                } else {
-                    this.token = result.token
-                    return true
                 }
             })
+            this.token = self.token
+            return this.token
         },
+
+        async submitPayment() {
+            await this.createToken()
+
+            if(!this.validateForm) {
+                return false
+            }
+
+            this.cartItems = this.$store.getters['cart/getCartItems']
+            this.$store.dispatch('payment/stripePayment', {
+                name: this.user.name,
+                email: this.user.email,
+                phone: this.user.phone,
+                address: this.user.address,
+                city: this.user.city,
+                country: this.user.country,
+                zip: this.user.zip,
+                total: this.totalPrice,
+                items: this.cartItems,
+                stripeToken: this.token
+            })
+            .then(response => {
+                if(!response.status === 200) {
+                    this.$data.error = true
+                    this.showMessage('Something went wrong')
+                    return false
+                }
+                
+                setTimeout(() => {
+                    this.clearData()
+                }, 3000)
+
+                this.showMessage('Your order created successfully! Thank you for choosing us!')
+                
+            })
+        },
+
+        async clearData() {
+            this.$router.push({ name: 'home' })
+            this.$store.dispatch('cart/emptyCart')
+            this.$store.dispatch('user/logout')
+        } 
     },
 
     beforeDestroy() {

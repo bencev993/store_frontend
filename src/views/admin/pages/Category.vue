@@ -1,7 +1,7 @@
 <template>
 
     <div class="relative grid grid-cols mx-auto text-center text-xs w-full sm:text-sm lg:w-4/5 lg:h-screen lg:overflow-hidden lg:flex lg:flex-row xl:w-full">
-        <div v-if="this.$data.error_msg != '' " :class="this.error == true ? 'bg-red-600' : 'bg-green-600' " class="flex z-10 absolute-center text-white font-semibold h-24 w-2/3 p-2 rounded-lg">
+        <div v-if="this.$data.error_msg != '' " :class="this.$data.error == true ? 'bg-red-600' : 'bg-green-600' " class="flex z-10 absolute-center text-white font-semibold h-24 w-2/3 p-2 rounded-lg">
             <span class="m-auto">{{ this.$data.error_msg }}</span>
         </div>
         <div class="my-auto lg:flex-1">
@@ -68,7 +68,7 @@ import { messageMixin } from '@/mixins/messageMixin'
             validateForm() {
                 if(!this.category.name) {
                     this.showMessage('Category name can not be empty')
-                    this.error = true
+                    this.$data.error = true
                     return false
                 }
                 return true
@@ -82,7 +82,7 @@ import { messageMixin } from '@/mixins/messageMixin'
                 this.$store.dispatch('category/createCategory', this.category)
                 .then((response) => {
                     if(!response.status === 200) {
-                        this.error = true
+                        this.$data.error = true
                         this.showMessage('Something went wrong')
                         return false
                     }
