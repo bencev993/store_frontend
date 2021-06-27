@@ -1,7 +1,7 @@
 <template>
-<div class="container mx-auto p-10">
+<div class="container mx-auto">
     <div class="w-3/4 lg:w-2/4 mx-auto">
-        <h1 class="text-xl text-center mb-4 border-b-2 pb-2 lg:pb-8">Checkout</h1>
+        <h1 class="text-xl text-center mb-4 border-b-2 pb-2 pt-10">Checkout</h1>
         <h4 class="mb-4">Your Total Payment: ${{ totalPrice }}</h4>
         <div v-if="this.$data.error_msg != '' " :class="this.$data.error == true ? 'bg-red-600' : 'bg-green-600' " class="flex absolute-center text-white font-semibold h-24 w-2/3 p-2 rounded-lg">
             <span class="m-auto">{{ this.$data.error_msg }}</span>
@@ -71,7 +71,7 @@
                 <div id="card-errors" role="alert"></div>
             </div>
             <div class="flex">
-                <div id="paypal-button"></div>
+                <button @click.prevent="prevPage" class="mx-auto bg-gray-300 hover:bg-gray-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded">Back</button>
                 <button @click.prevent="submitPayment" id="place-order" class="mx-auto shadow-md bg-teal-600 hover:bg-teal-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded">Place Order</button>
             </div>
         </form>
@@ -286,7 +286,11 @@ export default {
             this.$router.push({ name: 'home' })
             this.$store.dispatch('cart/emptyCart')
             this.$store.dispatch('user/logout')
-        } 
+        },
+        
+        prevPage() {
+            this.$router.go(-1)
+        }
     },
 
     beforeDestroy() {
