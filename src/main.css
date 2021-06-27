@@ -71,6 +71,10 @@ input[type="number"]::-webkit-outer-spin-button {
   margin: 0;
 }
 
+input:-webkit-autofill {
+  box-shadow: 0 0 0px 1000px #fbfbfb inset;
+  -webkit-box-shadow: 0 0 0px 1000px #fbfbfb inset;
+}
 /* ::-webkit-input-placeholder {
   color: #F3F4F6 !important;
 }
@@ -316,6 +320,17 @@ textarea {
 .toggle-menu.close .line3 {
 	transform:rotate(-45deg);
 	top:49%;
+}
+
+.StripeElement {
+  padding: 10px;
+  border: 1px solid rgb(229, 231, 235);
+  border-radius: 3px;
+}
+
+.StripeElement--focus {
+  border: 1px solid #000;
+  border-radius: 3px;
 }
 
 @media screen and (orientation: landscape) and (max-width: 900px) and (min-width: 320px) {

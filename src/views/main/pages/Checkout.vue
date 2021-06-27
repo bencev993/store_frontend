@@ -13,13 +13,13 @@
                     <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="name">
                         <i class="text-red-500">* </i>Full Name
                     </label>
-                    <input v-model="user.name" class="block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="name" name="name" type="text" placeholder="Full name" required>
+                    <input v-model="user.name" class="block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="name" name="name" type="text" placeholder="Full name" required>
                 </div>
                 <div class="w-full px-3 mb-8">
                     <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="email">
                         <i class="text-red-500">* </i>Email
                     </label>
-                    <input v-model="user.email" class="block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="email" name="email" type="email" placeholder="johndoe@gmail.com" required>
+                    <input v-model="user.email" class="block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="email" name="email" type="email" placeholder="johndoe@gmail.com" required>
                 </div>
             </div>
 
@@ -28,13 +28,13 @@
                     <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="phone">
                         <i class="text-red-500">* </i>Phone
                     </label>
-                    <input v-model="user.phone" class="block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="phone" name="phone" type="number" placeholder="1234567891" required>
+                    <input v-model="user.phone" class="block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="phone" name="phone" type="number" placeholder="1234567891" required>
                 </div>
                 <div class="w-full px-3 mb-8">
                     <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="address">
                         <i class="text-red-500">* </i>Address
                     </label>
-                    <input v-model="user.address" class="block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="address" name="address" type="text" placeholder="Street, house number" required>
+                    <input v-model="user.address" class="block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="address" name="address" type="text" placeholder="185 Berry St" required>
                 </div>
             </div>
 
@@ -43,19 +43,19 @@
                     <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="city">
                         <i class="text-red-500">* </i>City
                     </label>
-                    <input v-model="user.city" class="block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="city" name="city" type="text" placeholder="Chicago" required>
+                    <input v-model="user.city" class="block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="city" name="city" type="text" placeholder="San Francisco" required>
                 </div>
                 <div class="w-full lg:w-2/3 px-3 mb-8">
-                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="country">
-                        <i class="text-red-500">* </i>Country
+                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="state">
+                        <i class="text-red-500">* </i>State
                     </label>
-                    <input v-model="user.country" class="block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="country" name="country" type="text" placeholder="United States" required>
+                    <input v-model="user.state" class="block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="state" name="state" type="text" placeholder="United States" required>
                 </div>
                 <div class="w-full lg:w-1/3 px-3 mb-8">
                     <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="zipcode">
                         <i class="text-red-500">* </i>Zip code
                     </label>
-                    <input v-model="user.zip" class="block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="zipcode" name="zipcode" type="number" placeholder="12345" required>
+                    <input v-model="user.zip" class="block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="zipcode" name="zipcode" type="number" placeholder="12345" required>
                 </div>
             </div>
 
@@ -102,7 +102,7 @@ export default {
                 phone: '',
                 address: '',
                 city: '',
-                country: '',
+                state: '',
                 zip: '',
             },
             cartItems: null
@@ -123,7 +123,7 @@ export default {
             this.user.phone = user.phone
             this.user.address = user.address
             this.user.city = user.city
-            this.user.country = user.country
+            this.user.state = user.state
             this.user.zip = user.zip
         } 
     },
@@ -135,10 +135,14 @@ export default {
     },
 
     methods: {
-
         validateForm() {
-            if(!this.user.name) {
-                this.showMessage('Name field can not be empty')
+            if(!this.user.name || this.user.name.length < 5) {
+                this.showMessage('Name field must have at least 5 characters')
+                this.$data.error = true
+                return false
+            }
+            if(this.user.name.length > 40) {
+                this.showMessage('Name field can not be longer than 40 characters')
                 this.$data.error = true
                 return false
             }
@@ -147,8 +151,13 @@ export default {
                 this.$data.error = true
                 return false
             }
-            if(!this.user.phone) {
-                this.showMessage('Phone field can not be empty')
+            if(!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.user.email)) {
+                this.showMessage('Please enter a valid email address')
+                this.$data.error = true
+                return false
+            }
+            if(!this.user.phone || this.user.phone.length < 10 || this.user.phone.length > 15) {
+                this.showMessage('Phone number must be between 10 and 15 characters')
                 this.$data.error = true
                 return false
             }
@@ -162,8 +171,8 @@ export default {
                 this.$data.error = true
                 return false
             }
-            if(!this.user.country) {
-                this.showMessage('Country field can not be empty')
+            if(!this.user.state) {
+                this.showMessage('state field can not be empty')
                 this.$data.error = true
                 return false
             }
@@ -200,13 +209,13 @@ export default {
                 base: {
                     iconColor: '#666ee8',
                     color: '#31325f',
-                    fontWeight: 400,
                     fontFamily:
                         '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif',
                     fontSmoothing: 'antialiased',
                     fontSize: '15px',
                     '::placeholder': {
                         color: '#aab7c4',
+                        
                     },
                     ':-webkit-autofill': {
                         color: '#666ee8',
@@ -237,20 +246,21 @@ export default {
         },
 
         async submitPayment() {
-            await this.createToken()
+            this.cartItems = this.$store.getters['cart/getCartItems']
 
-            if(!this.validateForm) {
+            if(!this.validateForm()) {
                 return false
             }
+            
+            await this.createToken()
 
-            this.cartItems = this.$store.getters['cart/getCartItems']
             this.$store.dispatch('payment/stripePayment', {
                 name: this.user.name,
                 email: this.user.email,
                 phone: this.user.phone,
                 address: this.user.address,
                 city: this.user.city,
-                country: this.user.country,
+                state: this.user.state,
                 zip: this.user.zip,
                 total: this.totalPrice,
                 items: this.cartItems,
@@ -272,7 +282,7 @@ export default {
             })
         },
 
-        async clearData() {
+        clearData() {
             this.$router.push({ name: 'home' })
             this.$store.dispatch('cart/emptyCart')
             this.$store.dispatch('user/logout')
