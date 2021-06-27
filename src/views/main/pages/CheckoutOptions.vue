@@ -18,13 +18,12 @@
                     <router-link to="/checkout" class="w-full max-w-sm shadow-lg bg-teal-600 hover:bg-teal-400 focus:shadow-outline focus:outline-none text-center text-white font-bold mb-20 py-2 px-4 rounded">
                         Continue as Guest
                     </router-link>
-                    <!-- <a class="bg-black text-white text-center text-xl py-1 rounded-lg italic font-extrabold" id="paypal-handle" href="{{ route('payment.handle') }}">PayPal</a> -->
-                    <a class="bg-black text-white text-center text-xl cursor-pointer py-1 rounded-lg italic font-extrabold hover:bg-opacity-75">PayPal</a>
+                    <div id="paypal-button-container"></div>
                 </div>
             </div>
             <div class="hidden lg:block lg:border-r-2"></div>
             <div class="flex flex-col pt-20 border-t-2 lg:border-0 lg:px-10">
-                <div class="max-w-sm mx-auto lg:h-full lg:justify-around">
+                <div class="max-w-sm mx-auto lg:justify-around">
                 <h2 class="max-w-sm font-bold text-gray-800 text-lg">Returning Customers</h2>
                 <p class="max-w-sm mx-auto mt-2 mb-8">Sign in to speed up the checkout process and save payments to account.</p>
                 </div>
@@ -71,6 +70,8 @@
 </template>
 
 <script>
+import { loadScript } from '@paypal/paypal-js';
+
 export default {
     data() {
         return {
@@ -80,6 +81,14 @@ export default {
                 password: '',
             }
         }
+    },
+
+    async mounted() {
+        const paypalSdk = await loadScript({
+            'client-id': 'AepLKh_uoopRXVD11YYsjog4-V1nbylWVVavDDLw1rKDYnvMjyEgjyz6okDaFdMEaPVzyUj6ncg4uLq-',
+            currency: 'USD',
+        });
+        paypalSdk.Buttons().render('#paypal-button-container');
     },
 
     methods: {
