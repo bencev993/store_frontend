@@ -275,7 +275,7 @@ export default {
                 
                 setTimeout(() => {
                     this.clearData()
-                }, 3000)
+                }, 5000)
 
                 this.showMessage('Your order created successfully! Thank you for choosing us!')
                 
