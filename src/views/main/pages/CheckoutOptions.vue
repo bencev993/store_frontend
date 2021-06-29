@@ -2,11 +2,9 @@
   <div class="w-4/5 mx-auto p-10 min-h-90 lg:w-full lg:px-0">
     <div class="mx-auto">
         
-            <div v-if="errors" class="flex pb-10">
-                <ul class="m-auto bg-red-500 text-white italic">
-                    <li v-for="(error, index) in errors" :key="index" class="py-1 px-4">{{ error }}</li>
-                </ul>
-            </div>
+        <div v-if="this.$data.error_msg != '' " :class="this.$data.error == true ? 'bg-red-600' : 'bg-green-600' " class="flex absolute-center text-white font-semibold h-24 w-2/3 p-2 rounded-lg">
+            <h2 class="m-auto">{{ this.$data.error_msg }}</h2>
+        </div>
             
         <div class="flex flex-col px-5 mx-auto lg:flex-row lg:justify-evenly">
             <div class="flex flex-col lg:px-10">
@@ -71,11 +69,12 @@
 
 <script>
 import { loadScript } from '@paypal/paypal-js';
+import { messageMixin } from '@/mixins/messageMixin'
 
 export default {
+    mixins: [messageMixin],
     data() {
         return {
-            errors: null,
             user: {
                 email: '',
                 password: '',
@@ -110,8 +109,7 @@ export default {
                     setTimeout(() => {
                         self.clearData()
                     }, 5000)
-
-                    alert('Transaction completed by ' + details.payer.name.given_name)
+                    self.showMessage('Thank you for choosing us! We have received your order. We sent you an email containing the details of your order', 5000)
                 })
             }
         }).render('#paypal-button-container')
