@@ -187,6 +187,7 @@ export default {
                 return false
             }
             if(!this.token) {
+                console.log(this.token)
                 this.showMessage('Something went wrong with your card')
                 this.$data.error = true
                 return false
@@ -242,18 +243,19 @@ export default {
                 }
             })
             this.token = self.token
-            return this.token
+            console.log(this.token)
+            return
         },
 
         async submitPayment() {
             this.cartItems = this.$store.getters['cart/getCartItems']
+            
+            await this.createToken()
 
             if(!this.validateForm()) {
                 return false
             }
             
-            await this.createToken()
-
             this.$store.dispatch('payment/stripePayment', {
                 name: this.user.name,
                 email: this.user.email,
