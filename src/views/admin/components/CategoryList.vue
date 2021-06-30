@@ -1,7 +1,7 @@
 <template>
     <div class="flex items-center lg:flex-1 relative">
-        <div v-if="this.$data.error_msg != '' " :class="this.error == true ? 'bg-red-600' : 'bg-green-600' " class="flex z-10 absolute-center text-white font-semibold h-24 w-2/3 p-2 rounded-lg">
-            <span class="m-auto">{{ this.$data.error_msg }}</span>
+        <div v-if="this.$data.msg_heading != '' " :class="this.$data.error == true ? 'bg-red-600' : 'bg-green-600' " class="flex flex-col z-10 absolute-center text-white font-semibold h-24 w-2/3 p-2 rounded-lg">
+            <span class="m-auto">{{ this.$data.msg_heading }}</span>
         </div>
         <div class="flex flex-col list-none mx-auto w-2/3 max-h-3/4 overflow-auto lg:w-4/5">
             <div v-for="(parent, i) in categories" :key="`${i}-${parent.parent_id}`">

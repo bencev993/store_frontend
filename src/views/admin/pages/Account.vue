@@ -1,8 +1,8 @@
 <template>
     <div class="h-screen flex flex-col mx-auto relative">
         <h1 class="mx-auto pt-10">Account Settings</h1>
-        <div v-if="this.$data.error_msg != '' " :class="this.$data.error == true ? 'bg-red-600' : 'bg-green-600' " class="flex absolute-center text-white font-semibold h-24 w-2/3 p-2 rounded-lg">
-            <span class="m-auto">{{ this.$data.error_msg }}</span>
+        <div v-if="this.$data.msg_heading != '' " :class="this.$data.error == true ? 'bg-red-600' : 'bg-green-600' " class="flex flex-col absolute-center text-white font-semibold h-24 w-2/3 p-2 rounded-lg">
+            <span class="m-auto">{{ this.$data.msg_heading }}</span>
         </div>
         <div class="m-auto">
             <!-- Error or success msg here ---------------------->

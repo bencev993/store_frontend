@@ -3,8 +3,8 @@
     <div class="w-3/4 lg:w-2/4 mx-auto">
         <h1 class="text-xl text-center mb-4 border-b-2 pb-2 pt-10">Checkout</h1>
         <h4 class="mb-4">Your Total Payment: ${{ totalPrice }}</h4>
-        <div v-if="this.$data.error_msg != '' " :class="this.$data.error == true ? 'bg-red-600' : 'bg-green-600' " class="flex absolute-center text-white font-semibold h-24 w-2/3 p-2 rounded-lg">
-            <span class="m-auto">{{ this.$data.error_msg }}</span>
+        <div v-if="this.$data.msg_heading != '' " :class="this.$data.error == true ? 'bg-red-600' : 'bg-green-600' " class="flex flex-col absolute-center text-white font-semibold h-24 w-2/3 p-2 rounded-lg">
+            <span class="m-auto">{{ this.$data.msg_heading }}</span>
         </div>
 
         <form>

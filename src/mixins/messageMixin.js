@@ -1,16 +1,20 @@
 export const messageMixin = {
     data() {
         return {
-            error_msg: '',
+            msg_heading: '',
+            msg_content: '',
             error: false,
         }
     },
 
     methods: {
-        async showMessage(msg, time = 3000) {
-            this.error_msg = msg
+
+        async showMessage(msg_heading, msg_content = null, time = 3000) {
+            this.msg_heading = msg_heading
+            this.msg_content = msg_content
             setTimeout(() => {
-                this.error_msg = ''
+                this.msg_heading = ''
+                this.msg_content = ''
             }, time)
             return
         },

@@ -1,7 +1,7 @@
 <template>
     <div :class="{'product-for-sale': forSale}" class="product relative my-10 h-64 mx-auto">
-        <div v-if="this.$data.error_msg != '' " :class="this.error == true ? 'bg-red-600' : 'bg-green-600' " class="flex z-10 absolute bottom-0 text-white font-semibold h-20 w-full p-2 rounded-lg">
-            <span class="m-auto">{{ this.$data.error_msg }}</span>
+        <div v-if="this.$data.msg_heading != '' " :class="this.error == true ? 'bg-red-600' : 'bg-green-600' " class="flex z-10 absolute bottom-0 text-white font-semibold h-20 w-full p-2 rounded-lg">
+            <span class="m-auto">{{ this.$data.msg_heading }}</span>
         </div>
         <span v-if="forSale" class="off absolute transform rotate-45 text-white text-md text-semibold">{{ product.discount }}%<i class="text-xs"> OFF</i></span>
         <div class="toggle-btn h-full">

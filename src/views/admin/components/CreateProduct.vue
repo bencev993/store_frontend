@@ -1,7 +1,7 @@
 <template>
     <div class="grid grid-cols sm:grid-cols-2 sm:px-6 lg:px-0 relative">
-        <div v-if="this.$data.error_msg != '' " :class="this.$data.error == true ? 'bg-red-600' : 'bg-green-600' " class="flex absolute-center text-white font-semibold h-24 w-2/3 p-2 rounded-lg">
-            <span class="m-auto">{{ this.$data.error_msg }}</span>
+        <div v-if="this.$data.msg_heading != '' " :class="this.$data.error == true ? 'bg-red-600' : 'bg-green-600' " class="flex flex-col absolute-center text-white font-semibold h-24 w-2/3 p-2 rounded-lg">
+            <span class="m-auto">{{ this.$data.msg_heading }}</span>
         </div>
         <div class="flex flex-col mx-auto w-3/4 mt-10 bg-gradient-to-r from-blue-600 via-blue-600 to-teal-500 py-4 px-8 rounded-lg shadow-lg shadow-outer sm:w-full xl:w-3/4">
             <div class="w-full px-3 mb-8">

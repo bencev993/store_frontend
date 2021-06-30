@@ -1,8 +1,8 @@
 <template>
 
     <div class="relative grid grid-cols mx-auto text-center text-xs w-full sm:text-sm lg:w-4/5 lg:h-screen lg:overflow-hidden lg:flex lg:flex-row xl:w-full">
-        <div v-if="this.$data.error_msg != '' " :class="this.$data.error == true ? 'bg-red-600' : 'bg-green-600' " class="flex z-10 absolute-center text-white font-semibold h-24 w-2/3 p-2 rounded-lg">
-            <span class="m-auto">{{ this.$data.error_msg }}</span>
+        <div v-if="this.$data.msg_heading != '' " :class="this.$data.error == true ? 'bg-red-600' : 'bg-green-600' " class="flex flex-col z-10 absolute-center text-white font-semibold h-24 w-2/3 p-2 rounded-lg">
+            <span class="m-auto">{{ this.$data.msg_heading }}</span>
         </div>
         <div class="my-auto lg:flex-1">
             <div class="grid grid-cols sm:px-6">

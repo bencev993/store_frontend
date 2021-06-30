@@ -2,8 +2,9 @@
   <div class="w-4/5 mx-auto p-10 min-h-90 lg:w-full lg:px-0">
     <div class="mx-auto">
         
-        <div v-if="this.$data.error_msg != '' " :class="this.$data.error == true ? 'bg-red-600' : 'bg-green-600' " class="flex absolute-center text-white font-semibold h-24 w-2/3 p-2 rounded-lg">
-            <h2 class="m-auto">{{ this.$data.error_msg }}</h2>
+        <div v-if="this.$data.msg_heading != '' " :class="this.$data.error == true ? 'bg-red-600' : 'bg-green-600' " class="flex flex-col absolute-center text-white font-semibold h-24 w-2/3 p-2 rounded-lg">
+            <h2 class="m-auto">{{ this.$data.msg_heading }}</h2>
+            <p class="m-auto break-words">{{ this.$data.msg_content }}</p>
         </div>
             
         <div class="flex flex-col px-5 mx-auto lg:flex-row lg:justify-evenly">
@@ -109,7 +110,11 @@ export default {
                     setTimeout(() => {
                         self.clearData()
                     }, 5000)
-                    self.showMessage('Thank you for choosing us! We have received your order. We sent you an email containing the details of your order', 5000)
+                    self.showMessage(
+                        'Thank you for choosing us!',
+                        'We have received your order. We sent you an email containing the details of your order',
+                         5000
+                    )
                 })
             }
         }).render('#paypal-button-container')
