@@ -187,7 +187,6 @@ export default {
                 return false
             }
             if(!this.token) {
-                console.log(this.token)
                 this.showMessage('Something went wrong with your card')
                 this.$data.error = true
                 return false
@@ -243,7 +242,6 @@ export default {
                 }
             })
             this.token = self.token
-            console.log(this.token)
             return
         },
 
