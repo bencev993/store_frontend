@@ -277,7 +277,11 @@ export default {
                     this.clearData()
                 }, 5000)
 
-                this.showMessage('Your order created successfully! Thank you for choosing us!')
+                this.showMessage(
+                    'Thank you for choosing us!',
+                    'We have received your order. We sent you an email containing the details of your order',
+                    5000
+                )
                 
             })
         },
