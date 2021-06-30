@@ -293,8 +293,9 @@ export default {
         },
         
         prevPage() {
-            this.$router.go(-1)
+            this.$router.push({ name: 'checkout-options'})
         }
+
     },
 
     beforeDestroy() {
