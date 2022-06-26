@@ -102,8 +102,15 @@ const routes = [
     {
         path: "/order",
         name: "dashboard-order",
-        component: () => import("../views/admin/pages/Order"),
+        component: () => import("../views/admin/pages/OrderList"),
         meta: { requiresAuth: true, layout: 'admin' }
+    },
+    {
+        path: "/edit-order/:id",
+        name: "dashboard-order-edit",
+        component: () => import("../views/admin/pages/EditOrder"),
+        meta: { requiresAuth: true, layout: 'admin' },
+        props: true,
     },
     {
         path: "/stock",

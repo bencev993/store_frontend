@@ -2,7 +2,7 @@
     <div class="m-auto text-center text-xs sm:text-sm lg:w-4/5">
         <div class="container">
             <div class="grid grid-cols sm:grid-cols-2 sm:px-6 lg:px-0 relative">
-        <div v-if="this.$data.msg_heading != '' " :class="this.$data.error == true ? 'bg-red-600' : 'bg-green-600' " class="flex flex-col absolute-center text-white font-semibold h-24 w-2/3 p-2 rounded-lg">
+                <div v-if="this.$data.msg_heading != '' " :class="this.$data.error == true ? 'bg-red-600' : 'bg-green-600' " class="flex flex-col absolute-center text-white font-semibold h-24 w-2/3 p-2 rounded-lg">
                     <span class="m-auto">{{ this.$data.msg_heading }}</span>
                 </div>
                 <div class="flex flex-col mx-auto w-auto lg:w-full xl:w-3/4 bg-gradient-to-r from-blue-600 via-blue-600 to-teal-500 py-4 px-8 rounded-lg shadow-lg shadow-outer">
@@ -162,6 +162,8 @@ import { messageMixin } from '@/mixins/messageMixin'
                 if(!this.emptyForm) {
                     data.append('id', this.product.id)
                 } else {
+                    this.error = true
+                    this.showMessage('You need to change something to update the product')
                     return false
                 }
                 
@@ -182,6 +184,14 @@ import { messageMixin } from '@/mixins/messageMixin'
                 
                 data.append('images', this.newProduct.images)
                 this.$store.dispatch('product/updateProduct', data)
+                .then((response) => {
+                    if(!response.status === 200) {
+                        this.error = true
+                        this.showMessage('Something went wrong')
+                        return false
+                    }
+                    this.showMessage('Product has been successfully updated')
+                })
             },
 
             getProduct() {

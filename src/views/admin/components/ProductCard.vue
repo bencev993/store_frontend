@@ -27,9 +27,9 @@
 
 
             <div class="my-4 md:my-0 md:mx-auto md:col-span-2 xl:col-span-1">
-                    <div class='form-group'>
-                        <input @click.prevent="deleteProduct(product.id)" type="submit" value="Remove" class="py-1 md:w-full cursor-pointer shadow bg-red-500 hover:bg-red-400 focus:shadow-outline focus:outline-none text-white font-bold md:py-2 px-4 rounded">
-                    </div>
+                <div class='form-group'>
+                    <input @click.prevent="deleteProduct(product.id)" type="submit" value="Remove" class="py-1 md:w-full cursor-pointer shadow bg-red-500 hover:bg-red-400 focus:shadow-outline focus:outline-none text-white font-bold md:py-2 px-4 rounded">
+                </div>
             </div>
         </div>
     </router-link>

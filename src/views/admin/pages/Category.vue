@@ -88,6 +88,8 @@ import { messageMixin } from '@/mixins/messageMixin'
                     }
                     this.showMessage('Category created successfully')
                     this.fetchCategories()
+                    this.category.name = ''
+                    this.category.parent_id = null
                 })
             },
 

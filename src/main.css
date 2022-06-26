@@ -175,13 +175,6 @@ textarea {
   display: block;
 }
 
-.order-option-list {
-  position: absolute;
-  top: 0;
-  right: 0;
-  margin-right: -1px;
-}
-
 #menu-btn {
   position: absolute;
   top: 0;

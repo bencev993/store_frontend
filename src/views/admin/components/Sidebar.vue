@@ -2,7 +2,6 @@
     <nav class="bg-blue-600 text-md text-white top-0 pb-10 lg:pb-0 lg:h-screen lg:sticky">
     <div class="h-full flex flex-col pt-10 lg:pt-0">
         <ul class="flex flex-col m-auto tracking-widest w-1/2 sm:w-2/3 sm:overflow-auto lg:ul-height lg:overflow-hidden lg:w-full">
-            <!-- <li class="pb-6 lg:pb-20 my-auto {{ Request::is('admin/dashboard') ? 'sm:pl-8 sm:pr-0' : '' }}"> -->
             <li :class="routeName === 'dashboard' ? 'sm:pl-8 sm:pr-0' : '' " class="pb-6 lg:pb-20 my-auto">
                 <router-link :to="{name: 'dashboard'}" :class="routeName === 'dashboard' ? 'bg-white text-blue-600 sm:pl-32 lg:pl-2' : 'sm:pl-40 lg:pl-10'" class="py-2 flex items-center rounded-lg lg:rounded-l-full">
                     <svg class="w-8 p-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -19,8 +18,8 @@
                     </svg>Account
                 </router-link>
             </li>
-            <li class="my-auto" :class="routeName === 'dashboard-product' ? 'sm:pl-8 sm:pr-0' : '' ">
-                <router-link :to="{name: 'dashboard-product'}" :class="routeName === 'dashboard-product' ? 'bg-white text-blue-600 sm:pl-32 lg:pl-2' : 'sm:pl-40 lg:pl-10'" class="py-2 flex items-center rounded-lg lg:rounded-l-full">
+            <li class="my-auto" :class="routeName === 'dashboard-product' || routeName === 'dashboard-product-edit' ? 'sm:pl-8 sm:pr-0' : '' ">
+                <router-link :to="{name: 'dashboard-product'}" :class="routeName === 'dashboard-product' || routeName === 'dashboard-product-edit' ? 'bg-white text-blue-600 sm:pl-32 lg:pl-2' : 'sm:pl-40 lg:pl-10'" class="py-2 flex items-center rounded-lg lg:rounded-l-full">
                     <svg class="w-8 p-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7" />
                     </svg>Product
@@ -34,8 +33,8 @@
                 </router-link>
             </li>
             
-            <li class="my-auto" :class="routeName === 'dashboard-order' ? 'sm:pl-8 sm:pr-0' : '' ">
-                <router-link :to="{name: 'dashboard-order'}" :class="routeName === 'dashboard-order' ? 'bg-white text-blue-600 sm:pl-32 lg:pl-2' : 'sm:pl-40 lg:pl-10'" class="py-2 flex items-center rounded-lg lg:rounded-l-full">
+            <li class="my-auto" :class="routeName === 'dashboard-order' || routeName === 'dashboard-order-edit' ? 'sm:pl-8 sm:pr-0' : '' ">
+                <router-link :to="{name: 'dashboard-order'}" :class="routeName === 'dashboard-order' || routeName === 'dashboard-order-edit' ? 'bg-white text-blue-600 sm:pl-32 lg:pl-2' : 'sm:pl-40 lg:pl-10'" class="py-2 flex items-center rounded-lg lg:rounded-l-full">
                     <svg class="w-8 p-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
                     </svg>Order
